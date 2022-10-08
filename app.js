@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 require('dotenv').config({ path: __dirname + '/.env' })
-const { createUser, notifyUser } = require('./utils')
+const { createUser, notifyUser, findUser } = require('./utils')
 
 // NOTE: we need those from in process.env
 
@@ -37,6 +37,13 @@ app.post('/request_loan', async (req, res) => {
   } else {
     res.send('failed').status(500)
   }
+})
+
+app.post('/transfer_loan', async (req, res) => {
+  const { body: { userID } } = req
+  const user = findUser(userID)
+  if (user.error) { return res.send('User Not found').status(404) }
+  // here is the user
 })
 
 module.exports = app

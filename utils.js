@@ -15,6 +15,10 @@ const readFile = util.promisify(fs.readFile)
 
 const users = []
 
+/**
+ * this method creates user
+ * @param body
+ */
 const createUser = (body) => {
   const newUser = {
     _id: uuidv4(),
@@ -31,9 +35,23 @@ const createUser = (body) => {
 }
 
 /**
- * this method is reusable for wrapping msg object
- * and sending it using sendgrid
- * @param sendMailObject
+ * this method finds and return user if it exists
+ * @param userID
+ */
+const findUser = (userID) => {
+	const user = users.filter((user) => user._id === userID)
+	if (user.length === 1) {
+		return user[0]
+	} else {
+		return { error: 'Not Found' }
+	}
+}
+
+/**
+ * this method is reusable
+ * sending email using sendgrid
+ * @param email
+ * @param redirectTo
  */
 const sendEmail = async ({ email, redirectTo }) => {
   try {
@@ -58,7 +76,8 @@ const sendEmail = async ({ email, redirectTo }) => {
 /**
  * this method sends message and returns boolean
  * wether it was sent or not
- * @param sendSmsParams
+ * @param phone
+ * @param redirectTo
  */
 const sendMessage = async ({ phone, redirectTo }) => {
   try {
@@ -90,4 +109,5 @@ const notifyUser = async ({ phone, email, redirectTo }) => {
 module.exports = {
   createUser,
   notifyUser,
+	findUser,
 }
