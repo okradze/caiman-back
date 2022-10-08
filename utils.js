@@ -28,6 +28,8 @@ const createUser = (body) => {
     dateOfBirth: body.dateOfBirth,
     phone: body.phone,
     email: body.email,
+    creditAmount: body.creditAmount,
+    address: body.address,
   }
   users.push(newUser)
 
@@ -39,12 +41,12 @@ const createUser = (body) => {
  * @param userID
  */
 const findUser = (userID) => {
-	const user = users.filter((user) => user._id === userID)
-	if (user.length === 1) {
-		return user[0]
-	} else {
-		return { error: 'Not Found' }
-	}
+  const user = users.filter((user) => user._id === userID)
+  if (user.length === 1) {
+    return user[0]
+  } else {
+    return { error: 'Not Found' }
+  }
 }
 
 /**
@@ -109,5 +111,5 @@ const notifyUser = async ({ phone, email, redirectTo }) => {
 module.exports = {
   createUser,
   notifyUser,
-	findUser,
+  findUser,
 }
