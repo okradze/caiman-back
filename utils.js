@@ -77,7 +77,7 @@ const sendEmail = async ({ email, redirectTo }) => {
     const templateMarkup = mjml(hbsHtml)
     const emailRes = await sgMail.send({
       to: email,
-      from: 'levaniqistauri29@gmail.com',
+      from: 'okradzemirian@gmail.com',
       subject: 'სესხი დამტკიცებულია',
       text: 'თანხის მისაღებად გთხოვთ გაიაროთ ვერიფიკაცია',
       html: templateMarkup.html,
@@ -99,7 +99,7 @@ const sendMessage = async ({ phone, redirectTo }) => {
     const messageTemplate = `თანხის მისაღებად გთხოვთ გაიაროთ ვერიფიკაცია \n ${redirectTo}`
     const res = await twilioClient.messages.create({
       body: messageTemplate,
-      from: '+16403338654',
+      from: '+12057728546',
       to: `+995${phone}`,
     })
     return !!res
