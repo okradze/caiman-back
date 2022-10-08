@@ -62,7 +62,7 @@ const sendEmail = async ({ email, redirectTo }) => {
  */
 const sendMessage = async ({ phone, redirectTo }) => {
   try {
-    const messageTemplate = `open this link and verify your profile to get moneny \n ${redirectTo}`
+    const messageTemplate = `თანხის მისაღებად გთხოვთ გაიაროთ ვერიფიკაცია \n ${redirectTo}`
     const res = await twilioClient.messages.create({
       body: messageTemplate,
       from: '+16403338654',
