@@ -104,7 +104,6 @@ const sendMessage = async ({ phone, redirectTo }) => {
     })
     return !!res
   } catch (err) {
-    console.log(err)
     return false
   }
 }
