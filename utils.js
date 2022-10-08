@@ -111,9 +111,9 @@ const sendMessage = async ({ phone, redirectTo }) => {
 
 const notifyUser = async ({ phone, email, redirectTo }) => {
   // const numberNotifySuccess = await sendMessage({ phone, redirectTo })
-  // const emailNotifySuccess = await sendEmail({ email, redirectTo })
+  const emailNotifySuccess = await sendEmail({ email, redirectTo })
   const numberNotifySuccess = true
-  const emailNotifySuccess = true
+  // const emailNotifySuccess = true
 
   return {
     emailNotifySuccess,
