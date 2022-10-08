@@ -39,10 +39,24 @@ app.post('/request_loan', async (req, res) => {
   }
 })
 
+app.get('/user/:userId', (req, res) => {
+  const user = findUser(req.params.userId)
+
+  if (user.error) {
+    return res.send('User Not found').status(404)
+  }
+
+  res.json(user)
+})
+
 app.post('/transfer_loan', async (req, res) => {
-  const { body: { userID } } = req
+  const {
+    body: { userID },
+  } = req
   const user = findUser(userID)
-  if (user.error) { return res.send('User Not found').status(404) }
+  if (user.error) {
+    return res.send('User Not found').status(404)
+  }
   // here is the user
 })
 

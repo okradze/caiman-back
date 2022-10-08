@@ -13,7 +13,19 @@ const twilioClient = require('twilio')(
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const readFile = util.promisify(fs.readFile)
 
-const users = []
+const users = [
+  {
+    _id: '123',
+    firstName: 'მირიან',
+    lastName: 'ოქრაძე',
+    personalNumber: '01511100051',
+    dateOfBirth: '03-08-2004',
+    phone: '579219415',
+    email: 'okradzemirian@gmail.com',
+    creditAmount: 1500,
+    address: 'უნივერსიტეტის ქუჩა',
+  },
+]
 
 /**
  * this method creates user
@@ -41,9 +53,10 @@ const createUser = (body) => {
  * @param userID
  */
 const findUser = (userID) => {
-  const user = users.filter((user) => user._id === userID)
-  if (user.length === 1) {
-    return user[0]
+  const user = users.find((user) => user._id === userID)
+
+  if (user) {
+    return user
   } else {
     return { error: 'Not Found' }
   }
