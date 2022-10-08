@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios')
 const cors = require('cors')
 require('dotenv').config({ path: __dirname + '/.env' })
 const { createUser, notifyUser, findUser } = require('./utils')
@@ -45,5 +46,18 @@ app.post('/transfer_loan', async (req, res) => {
   if (user.error) { return res.send('User Not found').status(404) }
   // here is the user
 })
+
+app.get('/session_data/:sessionId', async (req, res) => {
+  const { params: { sessionId } } = req
+  const { data } = await axios({
+    url: `${process.env.KVALIFIKA_API}/verification/session-data/v2/${sessionId}`,
+    method: 'GET',
+    headers: {
+      Authorization: `${process.env.KVALIFIKA_SECRET_KEY}`,
+    },
+  })
+  res.json(data)
+})
+
 
 module.exports = app
